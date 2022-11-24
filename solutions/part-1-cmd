@@ -1,0 +1,68 @@
+  975  docker images
+  976  docker ps -a
+  977  docker pull infracloudio/csvserver:latest
+  978  docker pull prom/prometheus:v2.22.0
+  979  docker run -d infracloudio/csvserver:latest
+  980  latest: Pulling from infracloudio/csvserver
+  981  docker ps -a
+  982  docker logs 5d93278a89ae
+  983  docker inspect 5d93278a89ae
+  984  clear
+  985  ll
+  986  rm -rf csvserver/
+  987  vim csvserver
+  988  mkdir csvserver
+  989  cd csvserver/
+  990  ll
+  991  vim gencsv.sh
+  992  chmod 755 gencsv.sh
+  993  ll
+  994  ./gencsv.sh
+  995  ll
+  996  pwd
+  997  docker ps -a
+  998  docker rm -f 5d93278a89ae
+  999  docker logs 5d93278a89ae
+ 1000  docker images
+ 1001  docker run -d --name csvserver -v /root/csvserver:/csvserver/inputdata infracloudio/csvserver
+ 1002  docker ps -a
+ 1003  docker logs d0e6d32506fe
+ 1004  docker run -d --name csvserver1 -v /root/csvserver/inputFile:/csvserver/inputdata infracloudio/csvserver
+ 1005  docker ps -a
+ 1006  docker rm -f d0e6d32506fe
+ 1007  docker logs 3c7111f50ff8
+ 1008  clear
+ 1009  docker ps -a
+ 1010  docker run -d --name csvserver1 -v /root/csvserver/inputFile:/csvserver/inputdata -p 9300:9393 infracloudio/csvserver
+ 1011  docker run -d --name csvserver2 -v /root/csvserver/inputFile:/csvserver/inputdata -p 9300:9393 infracloudio/csvserver
+ 1012  docker ps -a
+ 1013  curl localhost:9393
+ 1014  curl localhost:9300
+ 1015  docker run -d --name csvserver3 -v /root/csvserver/inputFile:/csvserver/inputdata -p 9393:9300 infracloudio/csvserver
+ 1016  docker ps -a
+ 1017  docker run -d --name csvserver4 -e CSVSERVER_BORDER=Orange -v /root/csvserver/inputFile:/csvserver/inputdata -p 9393:9300 infracloudio/csvserver
+ 1018  docker ps -a
+ 1019  docker rm -f 3c7111f50ff8 116eb0ebed20 10ee67192f67
+ 1020  docker run -d --name csvserver4 -e CSVSERVER_BORDER=Orange -v /root/csvserver/inputFile:/csvserver/inputdata -p 9393:9300 infracloudio/csvserver
+ 1021  docker ps -a
+ 1022  docker rm -f 9adec4fefc57 4506a7c37ad6
+ 1023  docker ps -a
+ 1024  docker run -d --name csvserver4 -e CSVSERVER_BORDER=Orange -v /root/csvserver/inputFile:/csvserver/inputdata -p 9393:9300 infracloudio/csvserver
+ 1025  docker ps -a
+ 1026  clear
+ 1027  docker ps -a
+ 1028  docker logs 162fa328ad75
+ 1029  curl -o ./part-1-output http://localhost:9393/raw
+ 1030  ll
+ 1031  cat part-1-output
+ 1032  vim part-1-output
+ 1033  vim gencsv.sh
+ 1034  ./gencsv.sh
+ 1035  curl -o ./part-1-output http://localhost:9393/raw
+ 1036  ll
+ 1037  du -sh part-1-output
+ 1038  cat part-1-output
+ 1039  docker ps -a
+ 1040  docker logs 162fa328ad75 & part-1-logs
+ 1041  docker logs 162fa328ad75 >& part-1-logs
+
